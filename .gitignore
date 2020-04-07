@@ -1,0 +1,13 @@
+# Created by .ignore support plugin (hsz.mobi)
+### Example user template template
+### Example user template
+
+# IntelliJ project files
+.idea
+*.iml
+out
+gen
+/banana-data-processor-api/target/
+/banana-data-processor-server-impl/target/
+/banana-data-processor-api/banana-data-processor-api.iml
+/banana-data-processor-server-impl/banana-data-processor-server-impl.iml
