@@ -4,6 +4,7 @@ import com.whohim.wf.helper.ErrorHandler;
 import com.whohim.wf.model.demo;
 import com.whohim.wf.result.Response;
 import com.whohim.wf.service.FluxQueryService;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,16 +17,14 @@ import reactor.core.publisher.Mono;
  * @author WhomHim
  * @date Create in 2020-4-5 12:32:56
  */
+@AllArgsConstructor(onConstructor = @__(@Autowired))
 @RestController
 @RequestMapping("/api/")
 @Slf4j
 public class HelloController {
 
-    @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
-    @Autowired
     FluxQueryService fluxQueryService;
 
-    @Autowired
     ErrorHandler errorHandler;
 
     @GetMapping("mono")
@@ -59,4 +58,17 @@ public class HelloController {
                 .doOnError(errorHandler::handleFlowResponseException);
     }
 
+    @GetMapping("test2")
+    public Mono<Response<String>> test2() {
+        return Mono.just("")
+                .map(obj -> fluxQueryService.getHello())
+                .map(Response::success)
+                .doOnError(errorHandler::handleFlowResponseException);
+    }
+
+    public static void main(String[] args) {
+        Flux.just("tom", "jack", "allen")
+                .map(s -> s.concat("@qq.com"))
+                .subscribe(System.out::println);
+    }
 }

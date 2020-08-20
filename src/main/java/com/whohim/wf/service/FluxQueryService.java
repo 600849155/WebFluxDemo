@@ -10,4 +10,6 @@ import com.whohim.wf.model.demo;
 public interface FluxQueryService {
 
    demo getUser();
+
+   String getHello();
 }

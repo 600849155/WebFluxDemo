@@ -1,5 +1,6 @@
 package com.whohim.wf.helper;
 
+import com.whohim.wf.exception.DemoException;
 import com.whohim.wf.result.Response;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,7 +19,12 @@ public class ErrorHandler {
 
     public <T> Response<T> handleFlowResponseException(Throwable throwable) {
         log.error(throwable.getMessage(), throwable);
+        if (throwable instanceof DemoException) {
+            DemoException exception = (DemoException) throwable;
+            return Response.failure(exception.getRespCode().getCode(), exception.getMessage());
+        } else {
             return Response.failure(COMMON_ERR_RESP_CODE, throwable.getMessage());
+        }
     }
 
 }
